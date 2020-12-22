@@ -1,6 +1,11 @@
-FROM adoptopenjdk/openjdk11-openj9
+FROM adoptopenjdk/openjdk11-openj9:latest
 
-RUN apk add --no-cache curl tar bash procps
+# Install debian packages
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get -qq update
+RUN apt-get install zip -y
+RUN apt-get -qq install curl tar bash procps
+
 
 # Downloading and installing Maven
 ARG MAVEN_VERSION=3.6.3
@@ -45,7 +50,7 @@ RUN mkdir -p /usr/share/gradle /usr/share/gradle/ref \
   && echo "${GRADLE_SHA}  /tmp/gradle.zip" | sha256sum -c - \
   \
   && echo "Unziping gradle" \
-  && unzip -d /usr/share/gradle /tmp/gradle.zip \
+  && unzip -oq -d /usr/share/gradle /tmp/gradle.zip \
    \
   && echo "Cleaning and setting links" \
   && rm -f /tmp/gradle.zip \
