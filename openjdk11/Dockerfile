@@ -61,6 +61,10 @@ ENV GRADLE_VERSION 6.7.1
 ENV GRADLE_HOME /usr/bin/gradle
 ENV GRADLE_USER_HOME /cache
 
+# workaround: hide welcome message - https://github.com/gradle/gradle/issues/5213#issuecomment-445200225
+RUN mkdir -p ${GRADLE_USER_HOME}/notifications/${GRADLE_VERSION}/ \
+    && touch ${GRADLE_USER_HOME}/notifications/${GRADLE_VERSION}/release-features.rendered
+
 ENV PATH $PATH:$GRADLE_HOME/bin
 
 VOLUME $GRADLE_USER_HOME
