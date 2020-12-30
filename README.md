@@ -8,3 +8,4 @@ For access to them you have to setup your AWS credentials in your system.
 
 - AWS User: [Custom-Owned-Images](https://console.aws.amazon.com/iam/home?region=eu-west-1#/users/Custom-Owned-Images?section=permissions)
 - local build: `docker build -t trisbee/custom-owned-openjdk11 .`
+- open container: `docker run -it trisbee/custom-owned-openjdk11 sh`
